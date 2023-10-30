@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>     
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+        <link rel="stylesheet" type="text/css" href="./style.css">
+        <link rel="preload" href="images/Maplestory-Light.woff2" as="font" type="font/woff2" crossorigin>
+        <script src="https://kit.fontawesome.com/968e631654.js" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <style>
+            @font-face {
+                font-family: 'Maplestory-Light';
+                src: local(Maplestory-Light), 
+                     url(./images/Maplestory-Light.woff2) format("woff2");
+                font-weight: normal;
+                font-style: normal;
+                font-display: swap;
+            }
+        </style>
+    </head>
+    <body>        
+        <s_t3>
+            <s_sidebar_element>
+                <!-- 카테고리 -->
+                <nav class="category" id="sidebar-category">
+                    [##_category_list_##]                    
+                </nav>
+            </s_sidebar_element>            
+        </s_t3>
+        <!-- 카테고리 글수 괄호 제거 -->
+        <script type="text/javascript">            
+            const side_category = document.getElementById('sidebar-category');            
+            const c_cnt = side_category.getElementsByClassName("c_cnt");           
+            for (var i = 1; i < c_cnt.length; i++) {
+                let pattern = /[()]/gi;                
+                let str = c_cnt[i].innerHTML;                
+                let n = str.replace(pattern, '');
+                c_cnt[i].innerHTML = n;
+            }            
+        </script>
+        <!-- 카테고리 글 접기/펼치기 추가 -->
+        <script type="text/javascript">            
+            $(function() {
+                $(".category_list").children("li").has("ul").addClass("cat-sub-menu"),
+                    $(".cat-sub-menu .link_item").append().addClass("cat-toggle"),
+                    $(".cat-sub-menu").each(function() {
+                        var c = $(this).children(".link_item"),
+                            d = c.attr("href");
+                        c.removeAttr("href"),
+                            $(this).children("ul").prepend(), c.children("span").appendTo(c.parent(".cat-sub-menu").find(".view-all"))
+                    }),
+                    $(".cat-toggle").click(function() {
+                        var c = $(this).parent(".cat-sub-menu");
+                        c.children("ul").toggle(250), c.toggleClass("expanded")
+                    })
+            });
+        </script>        
+    </body>     
+</html>

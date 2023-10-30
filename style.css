@@ -1,0 +1,193 @@
+@charset "utf-8";
+
+/* nav */
+.category {
+  width: 250px;
+  height: 100%;
+  position: fixed;
+  border-right: 1px solid lightgray;  
+  font-family: Maplestory-Light, "fontawesome";
+  box-shadow: 0px 0px 5px 2px rgb(211, 211, 211, 0.3); /* 수평거리, 수직거리, 흐릿함과 확산 정도, 색상 */
+}
+
+.tt_category li ul a:not(.link_sub_item)::before {
+  margin-right: 15px;
+  padding: 5px;  
+  border-radius: 50%;
+  background-color: rgb(211, 211, 211, 0.3);
+  color: gray;
+}
+
+.tt_category li ul a:not(.link_sub_item):hover::before {
+  background-color: rgb(250, 128, 114, 0.2);
+  color: salmon;  
+  animation: categoryAnimate 1s linear;
+  display: inline-block;
+}
+
+.tt_category li ul li a::before {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.tt_category li ul .expanded a:not(.link_sub_item)::before {
+  background-color: rgb(250, 128, 114, 0.2);
+  color: salmon;
+}
+
+.tt_category li ul :nth-child(1) a:not(.link_sub_item)::before {
+  content: '\f121';  
+}
+
+.tt_category li ul :nth-child(2) a:not(.link_sub_item)::before {
+  content: '\f53f'; 
+}
+
+/* ROOT a tag class */
+.link_tit {
+  display: block;
+  margin-left: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-decoration: none; 
+  /* gradient animation 효과 */
+  background-image: linear-gradient(
+      to right,
+      #7953cd 10%,
+      #00affa 30%,
+      #0190cd 50%,
+      #764ada 70%,
+      #fa8072 90%
+  );  
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;  
+  color: transparent;
+  background-size: 500% auto;  
+  animation: gradient 4s ease-in-out infinite alternate;
+}
+
+/* 카테고리 1단 아이템 */
+.link_item {
+  display: block;  
+  padding: 10px;  
+  margin: 10px;
+  border-radius: 5px;    
+  text-decoration: none;
+  color: gray;
+  font-size: 0.8rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 카테고리 1단 hover */
+.link_item:hover {
+  background-color: rgb(250, 128, 114, 0.1);
+  color: salmon;  
+}
+
+.link_item::after {
+  background-color: salmon;  
+  bottom: 0;
+  right: 0;
+  left: 0;  
+  content: '';  
+  height: 1px;
+  position: absolute;
+  transform: translate3d(-102%, 0, 0);
+  display: block;
+}
+
+.link_item:hover::after {
+  animation: category-underline 1s ease;  
+}
+
+/* 카테고리 1단 펼침 */
+.expanded .link_item {
+  background-color: rgb(250, 128, 114, 0.1);
+  color: salmon;
+}
+
+/* 카테고리 글 개수 */
+.category_list .c_cnt {
+  color: salmon;
+  border: solid 1px salmon;
+  margin-left: 5px;
+  padding: 1px;
+  padding-left: 3px;
+  padding-right: 3px;
+  border-radius: 50%;
+  font-size: 0.5rem;
+}
+
+/* link_item === cat-toggle */
+.cat-toggle .c_cnt::after {
+  font-family: "fontawesome";
+  cursor: pointer;  
+  outline: none;  
+  font-size: 10px;
+  padding-top: 7px;
+  margin-right: 3px;
+  vertical-align: middle;
+  float: right;
+  color: purple;
+}
+
+/* 카테고리 접힘 아이콘 */
+.cat-sub-menu .cat-toggle .c_cnt::after {
+  content: "\f054";
+}
+
+/* 카테고리 펼침 아이콘 */
+.expanded .cat-toggle .c_cnt::after {
+  content: "\f107";
+}
+
+/* 카테고리 2단 Default 접힘 상태 */
+.sub_category_list {
+  display: none;
+}
+
+.sub_category_list li::before {  
+  content: "\f054";
+}
+
+/* 카테고리 2단 서브 아이템 */
+.link_sub_item {
+  display: block;
+  padding: 10px;
+  margin: 10px;
+  text-decoration: none; 
+}
+
+/* 카테고리 아이콘 애니매이션 */
+@keyframes categoryAnimate {
+  10%,20% {
+      transform: rotate3d(0, 0, 1, -9deg);
+  }
+
+  30%,50%,70%,90% {
+      transform: rotate3d(0, 0, 1, 9deg);
+  }
+
+  40%,60%,80% {
+      transform: rotate3d(0, 0, 1, -9deg);
+  }
+}
+
+/* 카테고리 언더라인 애니매이션 */
+@keyframes category-underline {
+    to {
+        transform: translate3d(101%,0,0)
+    }
+}
+
+/* 카테고리 전체글 링크 버튼 그라데이션 애니매이션 */
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
